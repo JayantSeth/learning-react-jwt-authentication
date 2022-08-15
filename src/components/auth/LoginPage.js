@@ -1,16 +1,31 @@
 import React from 'react';
 
 import {
-  Checkbox,
-  Grid,
-  TextField,
-  FormControlLabel,
-  Paper,
-  Button
-} from '@material-ui/core';
+Checkbox, 
+TextField,
+FormControlLabel,
+Paper,
+Button,
+Grid
+} from '@mui/material'
+
+import { makeStyles } from '@mui/styles';
+
+
+const useStyles = makeStyles({
+  paperStyle: {
+    background: 'linear-gradient(45deg, #455a64 50%, #455a64 50%)',
+    width: '50%',
+    justify: 'center',
+    marginTop: '40px',
+    margin: "auto",
+    textAlign: "center",
+  }
+});
 
 const LoginPage = () => {
   const [checked, setChecked] = React.useState(true);
+  const classes = useStyles();
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -18,7 +33,8 @@ const LoginPage = () => {
 
   return (
     <div style={{ padding: 30 }}>
-      <Paper>
+      <h2 style={{ margin: '10px', marginTop: '5px', textAlign: "center"}}>Login Form</h2>
+      <Paper elevation={10} className={classes.paperStyle}>
         <Grid
           container
           spacing={3}
@@ -46,7 +62,7 @@ const LoginPage = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button fullWidth> Login </Button>
+            <Button> Login </Button>
           </Grid>
         </Grid>
       </Paper>

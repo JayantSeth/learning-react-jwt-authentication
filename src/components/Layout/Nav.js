@@ -1,67 +1,197 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import green from "@material-ui/core/colors/green";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import Link from '@mui/material/Link';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-// react.school/material-ui
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2)
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#1976d2',
+    },
   },
-  title: {
-    flexGrow: 1
-  },
-  customColor: {
-    // or hex code, this is normal CSS background-color
-    backgroundColor: green[500]
-  },
-  customHeight: {
-    minHeight: 200
-  },
-  offset: theme.mixins.toolbar
-}));
+});
 
-export default function ButtonAppBar() {
-  const classes = useStyles();
-  const example = "primary";
-  const isCustomColor = example === "customColor";
-  const isCustomHeight = example === "customHeight";
+
+const ResponsiveAppBar = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
-    <React.Fragment>
-      <AppBar
-        color={isCustomColor || isCustomHeight ? "primary" : example}
-        className={`${isCustomColor && classes.customColor} ${
-          isCustomHeight && classes.customHeight
-        }`}
-      >
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            JWT Auth App
-          </Typography>
-          <Typography>
-          <Link href="home" color="inherit">Home</Link>
-          </Typography>
-          <Typography>
-          <Link href="thank_you" color="inherit">Thank You</Link>
-          <Link href="login" color="inherit">Login</Link>
-          </Typography>
-        </Toolbar>
+    <ThemeProvider theme={darkTheme}>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              JWT_Auth
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                  <MenuItem key="home" onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">
+                      <Link href="/home">Home</Link>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem key="login" onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">
+                      <Link href="/login">Login</Link>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem key="thank_you" onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">
+                      <Link href="/thank_you">Thank You</Link>
+                    </Typography>
+                  </MenuItem>
+              </Menu>
+            </Box>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              JWT_Auth
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                <Button
+                  key="home"
+                  href="/home"
+                  // variant="contained"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Home
+                </Button>
+                <Button
+                  key="login"
+                  href="/login"
+                  // variant="contained"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Login
+                </Button>
+                <Button
+                  key="thank_you"
+                  href="/thank_you"
+                  // variant="contained"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Thank You
+                </Button>
+            </Box>
+
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
-      <Toolbar />
-    </React.Fragment>
+    </ThemeProvider>
   );
-}
+};
+export default ResponsiveAppBar;
