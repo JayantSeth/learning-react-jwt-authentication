@@ -10,3 +10,6 @@ In this app I will learn the following:
 3. Create a basic Home Page.
 
 For this app we will use following app for the backend: [JWT Backend](https://github.com/JayantSeth/learning-flask-rest-jwt.git)
+
+References:
+[Creating React app](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/react-on-windows)
