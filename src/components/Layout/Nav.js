@@ -107,6 +107,11 @@ const ResponsiveAppBar = () => {
                       <Link href="/login">Login</Link>
                     </Typography>
                   </MenuItem>
+                  <MenuItem key="register" onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">
+                      <Link href="/register">Register</Link>
+                    </Typography>
+                  </MenuItem>
                   <MenuItem key="thank_you" onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">
                       <Link href="/thank_you">Thank You</Link>
@@ -148,6 +153,14 @@ const ResponsiveAppBar = () => {
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   Login
+                </Button>
+                <Button
+                  key="register"
+                  href="/register"
+                  // variant="contained"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Register
                 </Button>
                 <Button
                   key="thank_you"
