@@ -53,13 +53,6 @@ const SignUpPage = () => {
     setEmail(e.target.value);
   }
 
-  const validUsername = () => {
-    if (userName.length < 3) {
-      return true
-    }
-    return false
-  }
-
   const submitHandler = e => {
     e.preventDefault();
     console.log(userName);
@@ -81,7 +74,7 @@ const SignUpPage = () => {
 
   return (
     <div style={{ padding: 30 }}>
-      <h2 style={{ margin: '10px', marginTop: '5px', textAlign: "center"}}>Login Form</h2>
+      <h2 style={{ margin: '10px', marginTop: '5px', textAlign: "center"}}>SignUp Form</h2>
       <Paper elevation={10} className={classes.paperStyle}>
         <form onSubmit={submitHandler}>
         <Grid
@@ -96,8 +89,6 @@ const SignUpPage = () => {
               label="User Name" 
               onChange={usernameChangeHandler} 
               value={userName}
-              error={validUsername()}
-              helperText={validUsername() ? "Empty!" : ""}
               ></TextField>
           </Grid>
           <Grid item xs={12}>
@@ -120,7 +111,7 @@ const SignUpPage = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button onClick={submitHandler}> Login </Button>
+            <Button onClick={submitHandler}> SignUp </Button>
           </Grid>
         </Grid>
         </form>

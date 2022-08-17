@@ -9,8 +9,7 @@ Button,
 Grid
 } from '@mui/material'
 
-import postClient from "../utils/postClient";
-
+import axios from 'axios';
 import { makeStyles } from '@mui/styles';
 import { useNavigate } from 'react-router';
 
@@ -51,10 +50,15 @@ const LoginPage = () => {
     const body = {
       "username": userName, "password": passWord
     }
-    postClient(url, body);
-    setUsername("");
-    setPassword("");
-    Navigate("/home");
+    axios.post(url, body).then(response => {
+      console.log(response.data.access_token);
+      console.log(response.data.refresh_token);
+      Navigate("/home");
+    }).catch( err => {
+      setUsername("");
+      setPassword("");
+      console.log(err.response.data);
+    })
   }
 
   return (
